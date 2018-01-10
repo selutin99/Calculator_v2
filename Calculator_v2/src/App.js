@@ -4,7 +4,7 @@ const {
     View, ScrollView, Image
 } = require('react-native');
 
-import Калькулятор from './HelloPage1';
+import Калькулятор from './Calculator';
 import AboutPage from './AboutPage';
 import Router from './Router';
 
