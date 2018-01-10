@@ -1,174 +1,65 @@
-import React, {PropTypes} from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {Button} from './components/';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  Alert,
-  View,
-  TouchableHighlight,
-} from 'react-native';
-export default class App extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state={
-      result:0,
-      formula:"",
-    }
-    this.onPressOperatorOrNumber = this.onPressOperatorOrNumber.bind(this)
-  }
-  onPressOperatorOrNumber=(symbol)=>{
-    if(symbol==="X"){
-      symbol="*";
-    }
-	this.setState({
-		formula:this.state.formula+symbol
-	})
-  }
-  onPressSubmitResult=()=>{
-    try{
-      this.setState({
-        result:eval(this.state.formula)||0
-      })
-    }catch(e){
-      Alert.alert(
-		'Ошибка',
-		'Ошибка ввода! Проверьте правильность введённого выражения!'
-	  )
-    }
-  }
-  backspaceOperator=()=>{
-    this.setState({
-      formula:this.state.formula.slice(0,this.state.formula.length-1)
-    })
-  }
-  onPressACButton=()=>{
-    this.setState({formula:""})
-  }
-  render() {
-    return (
-        <View style={{flex:1}}>
-          <View style={{backgroundColor:'#282828',height:50}}>
-            <View style={{flex:1,justifyContent:'center'}}>
-                <Text style={[styles.resultText,{fontSize:(30-(this.state.result.toString().length))}]}>
-                  {this.state.result}
-                </Text>
-            </View>
-          </View>
-          <View style={{flex:1,flexDirection:'column',justifyContent:'flex-end'}}>
-            <View style={{flex:1,backgroundColor:'#494949'}}>
-              <View style={{flex:1,alignItems:'center',flexDirection:'row'}}>
-                  <Text style={styles.formulaText}>
-                    {this.state.formula}
-                  </Text>
-              </View>
-            </View>
-            <View style={styles.row}>
-            <Button  style={styles.ACbutton} titleStyle ={styles.titleOperationStyle} onPress={this.onPressACButton} title="C"/>
-			<Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="±"/>
-			<Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.backspaceOperator} title="←"/>
-            <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="/"/>
-            </View>
-            <View style={styles.row}>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="1"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="2"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="3"/>
-              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="X"/>
-            </View>
-            <View style={styles.row}>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="4"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="5"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="6"/>
-              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="-"/>
-            </View>
-            <View style={styles.row}>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="7"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="8"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="9"/>
-              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="+"/>
-            </View>
-            <View style={styles.row}>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="0"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="%"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="."/>
-              <Button  style={styles.equalButton} titleStyle = {styles.titleOperationStyle} onPress={this.onPressSubmitResult} title="="/>
-            </View>
-			<View style={styles.row}>
-              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="("/>
-              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title=")"/>
-              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="X²"/>
-              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="√"/>
-            </View>
-          </View>
+import React, { Component } from 'react';
+import { StackNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
+const {
+    View, ScrollView, Image
+} = require('react-native');
+
+import Калькулятор from './HelloPage1';
+import AboutPage from './AboutPage';
+import Router from './Router';
+
+const menuContent = (props) => {
+    return <View  style={{}}>
+        <View style={{
+            justifyContent: "center",
+            width:350,
+            alignItems:'center',
+            backgroundColor:'#000',}}>
+            <Image source={{uri:'http://download.seaicons.com/icons/tristan-edwards/sevenesque/128/Calculator-icon.png'}} style={{
+                margin:20,
+                width:120,
+                height:120,}}/>
         </View>
-    );
-  }
+        <ScrollView style={{}}>
+            <DrawerItems {...props} /></ScrollView></View>};
+
+
+const HomeScreen = DrawerNavigator({
+    Калькулятор: {screen: Калькулятор},
+    AboutPage: {screen: AboutPage},
+}, {
+    drawerStatusBar:false,
+    animationEnabled: true,
+    drawerWidth:350,
+    contentComponent: props => menuContent(props),
+    contentOptions: {
+        activeTintColor: '#0a0a0a',
+        labelStyle :{
+            color:'#0a0a0a'
+        },
+    },
+	drawerOpenRoute: 'DrawerOpen',
+	drawerCloseRoute: 'DrawerClose',
+	drawerToggleRoute: 'DrawerToggle',
+});
+
+
+const ViewContent = StackNavigator({
+    Router: {screen: Router},
+    HomeScreen: {screen: HomeScreen,
+        navigationOptions: {
+            header: null,
+            gesturesEnabled: false
+        }},
+
+}, {
+    animationEnabled: true,
+});
+
+export default class App extends Component {
+    render() {
+        return (
+                <ViewContent/>
+        );
+    }
 }
-
-const styles =StyleSheet.create({
-  component:{
-    flex:1,
-    flexDirection:'column'
-  },
-  ACbutton:{
-    flex:1,
-    backgroundColor:'#FFC473',
-    height:65,
-	borderRadius: 4,
-	borderWidth: 1,
-    borderColor: '#ffffff',
-  },
-  buttonNumber:{
-    flex:1,
-    height:65,
-	borderRadius: 4,
-	borderWidth: 1,
-    borderColor: '#B4B4B4',
-  },
-  operation:{
-    backgroundColor:'#FF9400',
-	borderRadius: 4,
-	borderWidth: 1,
-    borderColor: '#ffffff',
-    height:65,
-    flex:1,
-  },
-  textButton:{
-    color:'black',
-  },
-  formulaText:{
-    flex:1,
-    color:'white',
-    textAlign :'right',
-    fontSize:30,
-    marginRight:16,
-  },
-  iconStyle:{
-    color:'white',
-    marginLeft:16,
-  },
-
-  resultText:{
-    color:'white',
-    textAlign :'right',
-    fontSize:30,
-    marginRight:16,
-  },
-  titleOperationStyle:{
-    color:'white',
-	fontSize:30,
-  },
-  row:{
-    flexDirection:'row',
-    justifyContent: 'space-around'
-  },
-  equalButton:{
-    backgroundColor:'#FFAE40',
-    flex:1,
-    height:65,
-	borderRadius: 4,
-	borderWidth: 1,
-    borderColor: '#ffffff',
-  }
-})
