@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { StackNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
 const {
-    View, ScrollView, Image
+    View, ScrollView, Image, Text
 } = require('react-native');
 
 import Калькулятор from './Calculator';
-import AboutPage from './AboutPage';
+import Производные from './Derivative';
+import Логарифмы from './Logariphm';
+import Интегралы from './Integral';
+import Справка from './Helper';
 import Router from './Router';
 
 const menuContent = (props) => {
@@ -26,7 +29,10 @@ const menuContent = (props) => {
 
 const HomeScreen = DrawerNavigator({
     Калькулятор: {screen: Калькулятор},
-    AboutPage: {screen: AboutPage},
+    Производные: {screen: Производные},
+	Логарифмы: {screen: Логарифмы},
+    Интегралы: {screen: Интегралы},
+	Справка: {screen: Справка}
 }, {
     drawerStatusBar:false,
     animationEnabled: true,
@@ -49,9 +55,8 @@ const ViewContent = StackNavigator({
     HomeScreen: {screen: HomeScreen,
         navigationOptions: {
             header: null,
-            gesturesEnabled: false
+            gesturesEnabled: false,
         }},
-
 }, {
     animationEnabled: true,
 });
