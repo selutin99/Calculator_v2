@@ -71,27 +71,27 @@ export default class HelloPage extends React.PureComponent {
             <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="/"/>
             </View>
             <View style={styles.row}>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="1"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="2"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="3"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="1"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="2"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="3"/>
               <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="X"/>
             </View>
             <View style={styles.row}>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="4"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="5"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="6"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="4"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="5"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="6"/>
               <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="-"/>
             </View>
             <View style={styles.row}>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="7"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="8"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="9"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="7"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="8"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="9"/>
               <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="+"/>
             </View>
             <View style={styles.row}>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="0"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="%"/>
-              <Button  style={styles.buttonNumber} onPress={this.onPressOperatorOrNumber} title="."/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="0"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="%"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="."/>
               <Button  style={styles.equalButton} titleStyle = {styles.titleOperationStyle} onPress={this.onPressSubmitResult} title="="/>
             </View>
 			<View style={styles.row}>
@@ -113,7 +113,7 @@ const styles =StyleSheet.create({
   },
   ACbutton:{
     flex:1,
-    backgroundColor:'#FFC473',
+    backgroundColor:'#DF4A26',
     height:65,
 	borderRadius: 4,
 	borderWidth: 1,
@@ -159,12 +159,15 @@ const styles =StyleSheet.create({
     color:'white',
 	fontSize:30,
   },
+  titleButtonStyle:{
+	fontSize:30,
+  },
   row:{
     flexDirection:'row',
     justifyContent: 'space-around'
   },
   equalButton:{
-    backgroundColor:'#FFAE40',
+    backgroundColor:'#DF4A26',
     flex:1,
     height:65,
 	borderRadius: 4,

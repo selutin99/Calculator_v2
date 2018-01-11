@@ -1,5 +1,19 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+    welcome: {
+        fontSize: 12,
+        textAlign: 'center',
+        margin: 10,
+    }
+});
 
 export default class Router extends Component {
     static navigationOptions = {
@@ -33,8 +47,10 @@ export default class Router extends Component {
 
     render() {
         return (
-            <View>
-                <Text>Экран загрузки приложения</Text>
+            <View style={styles.container}>
+                <Text style={styles.welcome}>
+                    Загружаем универсальный калькулятор...
+                </Text>
             </View>
         )
     }
