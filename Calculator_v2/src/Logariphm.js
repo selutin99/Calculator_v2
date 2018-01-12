@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 onPressDoNothing=()=>{
 }
 
-export default class AboutPage extends Component {
+export default class Logariphm extends Component {
     constructor(props){
         super(props)
     }
@@ -44,14 +44,15 @@ export default class AboutPage extends Component {
               />
               <Button
                 onPress={onPressDoNothing}
-                title="Посчитать логарифм"
+                title="Вычислить логарифм"
                 color="#f5901d"
               />
               <Text style={{padding: 10, fontSize: 11}}>
                     Результаты:
-                </Text>
-                <Text style={{padding: 10, fontSize: 23}}>
-                </Text>
+              </Text>
+              <Text style={{padding: 10, fontSize: 14}}>
+					
+              </Text>
           </View>
         );
     }

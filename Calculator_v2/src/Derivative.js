@@ -12,7 +12,7 @@ const { Component } = React;
 onPressDoNothing=()=>{
 }
 
-export default class AboutPage extends Component {
+export default class Derivative extends Component {
     constructor(props){
         super(props)
 		this.state = {text: ''};
@@ -33,7 +33,7 @@ export default class AboutPage extends Component {
 				<Text style={{padding: 10, fontSize: 11}}>
 					Результаты:
 				</Text>
-				<Text style={{padding: 10, fontSize: 23}}>
+				<Text style={{padding: 10, fontSize: 14}}>
 					
 				</Text>
 			</View>
