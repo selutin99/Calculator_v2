@@ -2,7 +2,9 @@ const React = require('react');
 const {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Button,
+    TextInput
 } = require('react-native');
 const { Component } = React;
 const styles = StyleSheet.create({
@@ -22,7 +24,11 @@ const styles = StyleSheet.create({
         color: '#333333',
         marginBottom: 5,
     },
+
 });
+
+onPressDoNothing=()=>{
+}
 
 export default class AboutPage extends Component {
     constructor(props){
@@ -30,14 +36,23 @@ export default class AboutPage extends Component {
     }
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Это тестовая страница!
+          <View style={{padding: 10}}>
+              <TextInput
+                style={{height: 40}}
+                placeholder="Введите формулу"
+                onChangeText={(text) => this.setState({text})}
+              />
+              <Button
+                onPress={onPressDoNothing}
+                title="Посчитать логарифм"
+                color="#f5901d"
+              />
+              <Text style={{padding: 10, fontSize: 11}}>
+                    Результаты:
                 </Text>
-                <Text style={styles.instructions}>
-                    Здесь будут логарифмы!
+                <Text style={{padding: 10, fontSize: 23}}>
                 </Text>
-            </View>
+          </View>
         );
     }
 };
