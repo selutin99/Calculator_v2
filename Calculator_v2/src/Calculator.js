@@ -114,14 +114,14 @@ const styles =StyleSheet.create({
   ACbutton:{
     flex:1,
     backgroundColor:'#DF4A26',
-    height:65,
+    height:55,
 	borderRadius: 4,
 	borderWidth: 1,
     borderColor: '#ffffff',
   },
   buttonNumber:{
     flex:1,
-    height:65,
+    height:55,
 	borderRadius: 4,
 	borderWidth: 1,
     borderColor: '#B4B4B4',
@@ -131,7 +131,7 @@ const styles =StyleSheet.create({
 	borderRadius: 4,
 	borderWidth: 1,
     borderColor: '#ffffff',
-    height:65,
+    height:55,
     flex:1,
   },
   textButton:{
@@ -169,7 +169,7 @@ const styles =StyleSheet.create({
   equalButton:{
     backgroundColor:'#DF4A26',
     flex:1,
-    height:65,
+    height:55,
 	borderRadius: 4,
 	borderWidth: 1,
     borderColor: '#ffffff',

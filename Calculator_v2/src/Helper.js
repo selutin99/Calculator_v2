@@ -45,6 +45,9 @@ export default class Helper extends Component {
                 <Text style={styles.instructions}>
                     Данное приложение представляет из себя многофункциональный калькулятор, способный выполнять действия инженерного калькулятора, находить производные произвольных функций, решать логарифмические уравнения, вычислять определённый интеграл.
                 </Text>
+				<Text style={styles.instructions}>
+					Для ознакомления с доступными функциями нажмите кнопку ниже.
+				</Text>
 				<Button
 				  onPress={ ()=> Linking.openURL('https://docs.oracle.com/cd/E17904_01/apirefs.1111/e12048/functmath.htm') }
 				  title="Перейти"

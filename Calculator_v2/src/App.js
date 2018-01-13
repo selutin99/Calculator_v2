@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { StackNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
+import { StackNavigator, DrawerNavigator, DrawerItems} from 'react-navigation';
+import {Platform} from 'react-native';
 const {
-    View, ScrollView, Image, Text
+    View, ScrollView, Image, Text, TouchableHighlight 
 } = require('react-native');
+import Icon from 'react-native-vector-icons/Ionicons'
 
 import Калькулятор from './Calculator';
 import Производные from './Derivative';
@@ -10,6 +12,21 @@ import Логарифмы from './Logariphm';
 import Интегралы from './Integral';
 import Справка from './Helper';
 import Router from './Router';
+
+const DrawerIcon=()=>{
+	if(Platform.OS==='ios'){
+		return null;
+	}
+	return (
+		<Icon
+			name="md-menu"
+			size={28}
+			color="black"
+			style={{paddingLeft:20}}
+			onPress={()=>navigate('DrawerOpen')}
+		/>
+	);
+};
 
 const menuContent = (props) => {
     return <View  style={{}}>
@@ -53,10 +70,23 @@ const HomeScreen = DrawerNavigator({
 const ViewContent = StackNavigator({
     Router: {screen: Router},
     HomeScreen: {screen: HomeScreen,
-        navigationOptions: {
-            header: null,
+        navigationOptions: ({ navigation }) => ({
+			headerStyle: {
+				backgroundColor: 'black'
+			},
+            title: <Text style={{fontSize:16, color:'white'}}>Универсальный калькулятор</Text>,
+			headerLeft: <TouchableHighlight onPress={ () => navigation.navigate('DrawerOpen') }>
+						<Image 
+							source={require('./images/hamburgerIcon.png')} 
+							style={{
+								marginLeft:5,
+								width:40,
+								height:40,}} 
+						/>
+						</TouchableHighlight>,
             gesturesEnabled: false,
-        }},
+        })
+		},
 }, {
     animationEnabled: true,
 });
