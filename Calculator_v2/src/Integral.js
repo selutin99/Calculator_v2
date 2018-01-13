@@ -4,11 +4,23 @@ const {
     Text,
     StyleSheet,
 	TextInput,
-	Dimensions
+	Dimensions,
+	Button
 } = require('react-native');
 const { Component } = React;
 
 var width = Dimensions.get('window').width;
+onPressDoNothing=()=>{
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+});
 
 export default class Integral extends Component {
     constructor(props){
@@ -16,8 +28,8 @@ export default class Integral extends Component {
     }
     render() {
         return (
-			<View>
-				<View style={{padding: 10}}>
+			<View style={{padding:10}}>
+				<View style={{paddingLeft: 10}}>
 					<TextInput
 						style={{height: 40, width:40}}
 						placeholder=""
@@ -43,12 +55,17 @@ export default class Integral extends Component {
 					>
 					</TextInput>
 				</View>
+				<Button
+				  onPress={onPressDoNothing}
+				  title="Вычислить интеграл"
+				  color="#f5901d"
+				/>
 				<View style={{padding: 10}}>
-					<Text style={{padding: 10, fontSize: 11}}>
+					<Text style={{fontSize: 11}}>
 						Результаты:
 					</Text>
-					<Text style={{padding: 10, fontSize: 14}}>
-					
+					<Text style={{fontSize: 14}}>
+						
 					</Text>
 				</View>
 			</View>
