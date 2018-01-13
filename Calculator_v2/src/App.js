@@ -18,8 +18,8 @@ const menuContent = (props) => {
             width:350,
             alignItems:'center',
             backgroundColor:'#000',}}>
-            <Image source={{uri:'http://download.seaicons.com/icons/tristan-edwards/sevenesque/128/Calculator-icon.png'}} style={{
-                margin:20,
+            <Image source={require('./images/calcImg.png')} style={{
+                margin:10,
                 width:120,
                 height:120,}}/>
         </View>
