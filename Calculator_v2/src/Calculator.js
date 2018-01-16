@@ -8,15 +8,25 @@ import {
   Alert,
   View,
   TouchableHighlight,
+  NativeMoudules
 } from 'react-native';
+
+const Contacts = NativeMoudules.ContactsManager;
+
 export default class HelloPage extends React.PureComponent {
-  constructor(props) {	
+  constructor(props) {
     super(props);
     this.state={
-      result:0,
-      formula:"",
+      text: "",
+      result: 0,
+      formula: "",
     }
     this.onPressOperatorOrNumber = this.onPressOperatorOrNumber.bind(this)
+  }
+  calculate = () => {
+    Contacts.calculate("Артёма", (e) => {
+      this.setState({text: e});
+    });
   }
   onPressOperatorOrNumber=(symbol)=>{
     if(symbol==="X"){
@@ -78,7 +88,7 @@ export default class HelloPage extends React.PureComponent {
             <View style={{flex:1,backgroundColor:'#494949'}}>
               <View style={{flex:1,alignItems:'center',flexDirection:'row'}}>
                   <Text style={styles.formulaText}>
-                    {this.state.formula}
+                    {this.state.text}
                   </Text>
               </View>
             </View>
@@ -110,7 +120,7 @@ export default class HelloPage extends React.PureComponent {
               <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="0"/>
               <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.percentOperator} title="%"/>
               <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="."/>
-              <Button  style={styles.equalButton} titleStyle = {styles.titleOperationStyle} onPress={this.onPressSubmitResult} title="="/>
+              <Button  style={styles.equalButton} titleStyle = {styles.titleOperationStyle} onPress={this.calculate} title="="/>
             </View>
 			<View style={styles.row}>
               <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="("/>

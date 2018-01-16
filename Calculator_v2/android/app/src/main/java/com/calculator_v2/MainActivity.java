@@ -2,6 +2,7 @@ package com.calculator_v2;
 
 import com.facebook.react.ReactActivity;
 
+
 public class MainActivity extends ReactActivity {
 
     /**

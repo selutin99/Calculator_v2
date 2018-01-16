@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StackNavigator, DrawerNavigator, DrawerItems} from 'react-navigation';
 import {Platform} from 'react-native';
 const {
-    View, ScrollView, Image, Text, TouchableHighlight 
+    View, ScrollView, Image, Text, TouchableHighlight, NativeMoudules
 } = require('react-native');
 import Icon from 'react-native-vector-icons/Ionicons'
 
@@ -76,12 +76,12 @@ const ViewContent = StackNavigator({
 			},
             title: <Text style={{fontSize:16, color:'white'}}>Универсальный калькулятор</Text>,
 			headerLeft: <TouchableHighlight onPress={ () => navigation.navigate('DrawerOpen') }>
-						<Image 
-							source={require('./images/hamburgerIcon.png')} 
+						<Image
+							source={require('./images/hamburgerIcon.png')}
 							style={{
 								marginLeft:5,
 								width:40,
-								height:40,}} 
+								height:40,}}
 						/>
 						</TouchableHighlight>,
             gesturesEnabled: false,
