@@ -10,7 +10,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 export default class HelloPage extends React.PureComponent {
-  constructor(props) {
+  constructor(props) {	
     super(props);
     this.state={
       result:0,
@@ -22,6 +22,9 @@ export default class HelloPage extends React.PureComponent {
     if(symbol==="X"){
       symbol="*";
     }
+	else if(symbol==="X²"){
+	  symbol="^2";
+	}
 	this.setState({
 		formula:this.state.formula+symbol
 	})
@@ -41,6 +44,21 @@ export default class HelloPage extends React.PureComponent {
   backspaceOperator=()=>{
     this.setState({
       formula:this.state.formula.slice(0,this.state.formula.length-1)
+    })
+  }
+  plusMinusOperator=()=>{
+    this.setState({
+		formula:"-("+this.state.formula+")"
+    })
+  }
+  sqrtOperator=()=>{
+    this.setState({
+		formula:"sqrt("+this.state.formula+")"
+    })
+  }
+  percentOperator=()=>{
+    this.setState({
+		formula:"percent("+this.state.formula+")"
     })
   }
   onPressACButton=()=>{
@@ -66,7 +84,7 @@ export default class HelloPage extends React.PureComponent {
             </View>
             <View style={styles.row}>
             <Button  style={styles.ACbutton} titleStyle ={styles.titleOperationStyle} onPress={this.onPressACButton} title="C"/>
-			<Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="±"/>
+			<Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.plusMinusOperator} title="±"/>
 			<Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.backspaceOperator} title="←"/>
             <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="/"/>
             </View>
@@ -90,7 +108,7 @@ export default class HelloPage extends React.PureComponent {
             </View>
             <View style={styles.row}>
               <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="0"/>
-              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="%"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.percentOperator} title="%"/>
               <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="."/>
               <Button  style={styles.equalButton} titleStyle = {styles.titleOperationStyle} onPress={this.onPressSubmitResult} title="="/>
             </View>
@@ -98,7 +116,7 @@ export default class HelloPage extends React.PureComponent {
               <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="("/>
               <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title=")"/>
               <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="X²"/>
-              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="√"/>
+              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.sqrtOperator} title="√"/>
             </View>
           </View>
         </View>
