@@ -8,19 +8,19 @@ import {
   Alert,
   View,
   TouchableHighlight,
-  NativeMoudules
+  NativeModules
 } from 'react-native';
 
-const Contacts = NativeMoudules.ContactsManager;
+const Contacts = NativeModules.ContactsManager;
 
 export default class HelloPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state={
-      text: "",
+      text: 'NaN',
       result: 0,
-      formula: "",
-    }
+      formula: ""
+	};
     this.onPressOperatorOrNumber = this.onPressOperatorOrNumber.bind(this)
   }
   calculate = () => {
