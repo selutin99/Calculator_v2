@@ -11,20 +11,20 @@ import {
   NativeModules
 } from 'react-native';
 
-const Contacts = NativeModules.ContactsManager;
+const Evaluate = NativeModules.CalculatorManager;
 
 export default class HelloPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state={
-      text: 'NaN',
+      text: '',
       result: 0,
       formula: ""
 	};
     this.onPressOperatorOrNumber = this.onPressOperatorOrNumber.bind(this)
   }
   calculate = () => {
-    Contacts.calculate("Артёма", (e) => {
+    Evaluate.calculate(this.state.formula, (e) => {
       this.setState({text: e});
     });
   }
@@ -38,18 +38,6 @@ export default class HelloPage extends React.PureComponent {
 	this.setState({
 		formula:this.state.formula+symbol
 	})
-  }
-  onPressSubmitResult=()=>{
-    try{
-      this.setState({
-        result:eval(this.state.formula)||0
-      })
-    }catch(e){
-      Alert.alert(
-		'Ошибка',
-		'Ошибка ввода! Проверьте правильность введённого выражения!'
-	  )
-    }
   }
   backspaceOperator=()=>{
     this.setState({
@@ -72,7 +60,7 @@ export default class HelloPage extends React.PureComponent {
     })
   }
   onPressACButton=()=>{
-    this.setState({formula:""})
+    this.setState({formula:"",text:""})
   }
   render() {
     return (
@@ -80,7 +68,7 @@ export default class HelloPage extends React.PureComponent {
           <View style={{backgroundColor:'#282828',height:50}}>
             <View style={{flex:1,justifyContent:'center'}}>
                 <Text style={[styles.resultText,{fontSize:(30-(this.state.result.toString().length))}]}>
-                  {this.state.result}
+                  {this.state.text}
                 </Text>
             </View>
           </View>
@@ -88,7 +76,7 @@ export default class HelloPage extends React.PureComponent {
             <View style={{flex:1,backgroundColor:'#494949'}}>
               <View style={{flex:1,alignItems:'center',flexDirection:'row'}}>
                   <Text style={styles.formulaText}>
-                    {this.state.text}
+                    {this.state.formula}
                   </Text>
               </View>
             </View>

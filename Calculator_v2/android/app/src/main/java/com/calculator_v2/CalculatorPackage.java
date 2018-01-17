@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class ContactsPackage implements ReactPackage{
+public class CalculatorPackage implements ReactPackage{
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
     }
@@ -25,7 +25,7 @@ public class ContactsPackage implements ReactPackage{
     public List<NativeModule> createNativeModules (ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
 
-        modules.add(new ContactsManager(reactContext));
+        modules.add(new CalculatorManager(reactContext));
         return modules;
     }
 }
