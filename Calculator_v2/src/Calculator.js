@@ -14,12 +14,17 @@ import {
 const Evaluate = NativeModules.CalculatorManager;
 
 export default class HelloPage extends React.PureComponent {
+
   constructor(props) {
     super(props);
     this.state={
+      countOfSymbol: false,
+      count: 0,
       text: '',
       result: 0,
-      formula: ""
+      formula: "",
+      opr: ["+", "/", "-", "*", "%", "("],
+      countForDot: 0
 	};
     this.onPressOperatorOrNumber = this.onPressOperatorOrNumber.bind(this)
   }
@@ -28,13 +33,23 @@ export default class HelloPage extends React.PureComponent {
       this.setState({text: e});
     });
   }
+
+
   onPressOperatorOrNumber=(symbol)=>{
+    this.state.countForDot = 0;
     if(symbol==="X"){
       symbol="*";
     }
 	else if(symbol==="X²"){
 	  symbol="^2";
 	}
+/*  if (symbol === ".") {
+    for (var i = 0; i < this.state.opr.length; i++) {
+      if (this.state.formula.slice(this.state.formula.length - 1, this.state.formula.length) === this.state.opr[i] || this.state.count == 1 || symbol == "") this.state.countForDot++;
+    }
+    if (this.state.countForDot != 0) symbol = "";
+    else this.state.count = 1;
+  }*/
 	this.setState({
 		formula:this.state.formula+symbol
 	})
