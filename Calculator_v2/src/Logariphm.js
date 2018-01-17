@@ -4,7 +4,8 @@ const {
     Text,
     StyleSheet,
     Button,
-    TextInput
+    TextInput,
+	NativeModules
 } = require('react-native');
 const { Component } = React;
 const styles = StyleSheet.create({
@@ -27,23 +28,31 @@ const styles = StyleSheet.create({
 
 });
 
-onPressDoNothing=()=>{
-}
+const Evaluate = NativeModules.LogariphmManager;
 
 export default class Logariphm extends Component {
     constructor(props){
         super(props)
+		this.state = {
+			formula: "",
+			text: ''
+		}
     }
+	justEval = () => {
+		Evaluate.justEval(this.state.formula, (e) => {
+		  this.setState({text: e});
+		});
+	}
     render() {
         return (
           <View style={{padding: 10}}>
               <TextInput
                 style={{height: 40}}
                 placeholder="Введите формулу"
-                onChangeText={(text) => this.setState({text})}
+                onChangeText={(value) => this.setState({formula: value})}
               />
               <Button
-                onPress={onPressDoNothing}
+                onPress={this.justEval}
                 title="Вычислить логарифм"
                 color="#f5901d"
               />
@@ -51,7 +60,7 @@ export default class Logariphm extends Component {
                     Результаты:
               </Text>
               <Text style={{padding: 10, fontSize: 14}}>
-					
+				 {this.state.text}
               </Text>
           </View>
         );
