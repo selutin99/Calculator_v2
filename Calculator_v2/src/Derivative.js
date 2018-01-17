@@ -1,32 +1,43 @@
 const React = require('react');
 const {
-	AppRegistry,
+		AppRegistry,
     View,
     Text,
-	Button,
-	TextInput,
-    StyleSheet
+		Button,
+		TextInput,
+    StyleSheet,
+		NativeModules
 } = require('react-native');
 const { Component } = React;
 
 onPressDoNothing=()=>{
 }
 
+const Evaluate = NativeModules.DerivativeManager;
+
 export default class Derivative extends Component {
     constructor(props){
         super(props)
-		this.state = {text: ''};
+		this.state = {
+			text: '',
+			formula: ""
+			}
     }
+		justEval = () => {
+			Evaluate.justEval(this.state.formula, (e) => {
+			  this.setState({text: e});
+			});
+		}
     render() {
         return (
             <View style={{padding: 10}}>
 				<TextInput
 				  style={{height: 40}}
 				  placeholder="Введите формулу"
-				  onChangeText={(text) => this.setState({text})}
+				  onChangeText={(value) => this.setState({formula: value})}
 				/>
 				<Button
-				  onPress={onPressDoNothing}
+				  onPress={this.justEval}
 				  title="Найти производную"
 				  color="#f5901d"
 				/>
@@ -34,7 +45,7 @@ export default class Derivative extends Component {
 					Результаты:
 				</Text>
 				<Text style={{padding: 10, fontSize: 14}}>
-					
+					{this.state.text}
 				</Text>
 			</View>
         );

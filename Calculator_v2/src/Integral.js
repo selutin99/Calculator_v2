@@ -5,7 +5,8 @@ const {
     StyleSheet,
 	TextInput,
 	Dimensions,
-	Button
+	Button,
+  NativeModules
 } = require('react-native');
 const { Component } = React;
 
@@ -22,10 +23,24 @@ const styles = StyleSheet.create({
     },
 });
 
+const Evaluate = NativeModules.IntegralManager;
+
 export default class Integral extends Component {
     constructor(props){
         super(props)
+        this.state = {
+          formula: "",
+          text: "",
+          up: "",
+          down: ""
+        }
     }
+
+    justEval = () => {
+  		Evaluate.justEval(this.state.formula, this.state.down, this.state.up, (e) => {
+  		  this.setState({text: e});
+  		});
+  	}
     render() {
         return (
 			<View style={{padding:10}}>
@@ -33,7 +48,7 @@ export default class Integral extends Component {
 					<TextInput
 						style={{height: 40, width:40}}
 						placeholder=""
-						onChangeText={(text) => this.setState({text})}
+						onChangeText={(value) => this.setState({up: value})}
 					>
 					</TextInput>
 				</View>
@@ -44,19 +59,19 @@ export default class Integral extends Component {
 					<TextInput
 					  style={{width:width-70,  height: 50}}
 					  placeholder="Введите формулу и пределы"
-					  onChangeText={(text) => this.setState({text})}
+					  onChangeText={(value) => this.setState({formula: value})}
 					/>
 				</View>
 				<View style={{paddingTop: 40, paddingLeft: 10}}>
 					<TextInput
 						style={{height: 40, width:40}}
 						placeholder=""
-						onChangeText={(text) => this.setState({text})}
+						onChangeText={(value) => this.setState({down: value})}
 					>
 					</TextInput>
 				</View>
 				<Button
-				  onPress={onPressDoNothing}
+				  onPress={this.justEval}
 				  title="Вычислить интеграл"
 				  color="#f5901d"
 				/>
@@ -65,7 +80,7 @@ export default class Integral extends Component {
 						Результаты:
 					</Text>
 					<Text style={{fontSize: 14}}>
-						
+						{this.state.text}
 					</Text>
 				</View>
 			</View>

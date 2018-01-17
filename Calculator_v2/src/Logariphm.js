@@ -5,7 +5,7 @@ const {
     StyleSheet,
     Button,
     TextInput,
-	NativeModules
+	  NativeModules
 } = require('react-native');
 const { Component } = React;
 const styles = StyleSheet.create({
