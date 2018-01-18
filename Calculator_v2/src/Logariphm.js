@@ -59,7 +59,7 @@ export default class Logariphm extends Component {
               <Text style={{padding: 10, fontSize: 11}}>
                     Результаты:
               </Text>
-              <Text style={{padding: 10, fontSize: 14}}>
+              <Text style={{paddingLeft:10, fontSize: 14}}>
 				 {this.state.text}
               </Text>
           </View>

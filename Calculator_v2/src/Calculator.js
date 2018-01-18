@@ -23,10 +23,10 @@ export default class HelloPage extends React.PureComponent {
       text: '',
       result: 0,
       formula: "",
-      opr: ["+", "/", "-", "*", "%", "("],
-      countForDot: 0
+      opr: ["+", "/", "-", "*","(",")"]
 	};
-    this.onPressOperatorOrNumber = this.onPressOperatorOrNumber.bind(this)
+    this.onPressOperator = this.onPressOperator.bind(this)
+	this.onPressNumber = this.onPressNumber.bind(this)
   }
   calculate = () => {
     Evaluate.calculate(this.state.formula, (e) => {
@@ -34,44 +34,96 @@ export default class HelloPage extends React.PureComponent {
     });
   }
 
-
-  onPressOperatorOrNumber=(symbol)=>{
-    this.state.countForDot = 0;
+  onPressOperator=(symbol)=>{
+	var result="";
     if(symbol==="X"){
       symbol="*";
     }
 	else if(symbol==="X²"){
 	  symbol="^2";
 	}
-/*  if (symbol === ".") {
-    for (var i = 0; i < this.state.opr.length; i++) {
-      if (this.state.formula.slice(this.state.formula.length - 1, this.state.formula.length) === this.state.opr[i] || this.state.count == 1 || symbol == "") this.state.countForDot++;
-    }
-    if (this.state.countForDot != 0) symbol = "";
-    else this.state.count = 1;
-  }*/
+	
+	for(var i=0; i<this.state.opr.length; i++){
+		if(this.state.formula[this.state.formula.length-1]===this.state.opr[i] || this.state.formula.length==0){
+			result="";
+			break;
+		}
+		else{
+			result=symbol;
+		}
+	}
+	
+	this.setState({
+		formula:this.state.formula+result
+	})
+  }
+  
+  onPressNumber=(symbol)=>{
 	this.setState({
 		formula:this.state.formula+symbol
 	})
   }
+  
+  openBracket=(symbol)=>{
+    this.setState({
+      formula:this.state.formula+"("
+    })
+  }
+  closeBracket=(symbol)=>{
+    var result = "";
+	if(this.state.formula.indexOf("(")==-1 || this.state.formula.length==0){
+		result="";
+	}
+	else{
+		result=symbol;
+	}
+    this.setState({
+      formula:this.state.formula+result
+    })
+  }
+  
+  
   backspaceOperator=()=>{
     this.setState({
       formula:this.state.formula.slice(0,this.state.formula.length-1)
     })
   }
   plusMinusOperator=()=>{
-    this.setState({
-		formula:"-("+this.state.formula+")"
-    })
+	if(this.state.formula.length!=0){
+		this.setState({
+			formula:"-("+this.state.formula+")"
+		})
+	}
   }
   sqrtOperator=()=>{
-    this.setState({
-		formula:"sqrt("+this.state.formula+")"
-    })
+	if(this.state.formula.length!=0){
+		this.setState({
+			formula:"sqrt("+this.state.formula+")"
+		})
+	}
   }
   percentOperator=()=>{
+	if(this.state.formula.length!=0){
+		this.setState({
+			formula:"percent("+this.state.formula+")"
+		})
+	}
+  }
+  dotOperator=()=>{
+	var result="";
+	if(this.state.formula.length==0){
+		result="0.";
+	}
+	else{
+		if(this.state.formula[this.state.formula.length-1]==="."){
+			result="";
+		}
+		else{
+			result=".";
+		}
+	}
     this.setState({
-		formula:"percent("+this.state.formula+")"
+		formula:this.state.formula+result
     })
   }
   onPressACButton=()=>{
@@ -99,36 +151,36 @@ export default class HelloPage extends React.PureComponent {
             <Button  style={styles.ACbutton} titleStyle ={styles.titleOperationStyle} onPress={this.onPressACButton} title="C"/>
 			<Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.plusMinusOperator} title="±"/>
 			<Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.backspaceOperator} title="←"/>
-            <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="/"/>
+            <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperator} title="/"/>
             </View>
             <View style={styles.row}>
-              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="1"/>
-              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="2"/>
-              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="3"/>
-              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="X"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressNumber} title="1"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressNumber} title="2"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressNumber} title="3"/>
+              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperator} title="X"/>
             </View>
             <View style={styles.row}>
-              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="4"/>
-              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="5"/>
-              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="6"/>
-              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="-"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressNumber} title="4"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressNumber} title="5"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressNumber} title="6"/>
+              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperator} title="-"/>
             </View>
             <View style={styles.row}>
-              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="7"/>
-              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="8"/>
-              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="9"/>
-              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="+"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressNumber} title="7"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressNumber} title="8"/>
+              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressNumber} title="9"/>
+              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperator} title="+"/>
             </View>
             <View style={styles.row}>
-              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="0"/>
-              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.percentOperator} title="%"/>
-              <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperatorOrNumber} title="."/>
+			  <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.dotOperator} title="."/>
+			  <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressNumber} title="0"/>
+			  <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.percentOperator} title="%"/>
               <Button  style={styles.equalButton} titleStyle = {styles.titleOperationStyle} onPress={this.calculate} title="="/>
             </View>
 			<View style={styles.row}>
-              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="("/>
-              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title=")"/>
-              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperatorOrNumber} title="X²"/>
+              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.openBracket} title="("/>
+              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.closeBracket} title=")"/>
+              <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperator} title="X²"/>
               <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.sqrtOperator} title="√"/>
             </View>
           </View>

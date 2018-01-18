@@ -79,7 +79,7 @@ export default class Integral extends Component {
 					<Text style={{fontSize: 11}}>
 						Результаты:
 					</Text>
-					<Text style={{fontSize: 14}}>
+					<Text style={{paddingTop: 10, fontSize: 14}}>
 						{this.state.text}
 					</Text>
 				</View>
