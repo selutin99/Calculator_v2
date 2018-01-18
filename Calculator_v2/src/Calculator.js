@@ -23,7 +23,7 @@ export default class HelloPage extends React.PureComponent {
       text: '',
       result: 0,
       formula: "",
-      opr: ["+", "/", "-", "*","(",")"]
+      opr: ["+", "/", "-", "*","("]
 	};
     this.onPressOperator = this.onPressOperator.bind(this)
 	this.onPressNumber = this.onPressNumber.bind(this)
