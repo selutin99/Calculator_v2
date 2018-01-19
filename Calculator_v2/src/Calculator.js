@@ -23,7 +23,7 @@ export default class HelloPage extends React.PureComponent {
       text: '',
       result: 0,
       formula: "",
-      opr: ["+", "/", "-", "*","("]
+      opr: ["+", "/", "-", "*", "(", "."]
 	};
     this.onPressOperator = this.onPressOperator.bind(this)
 	this.onPressNumber = this.onPressNumber.bind(this)
@@ -44,9 +44,22 @@ export default class HelloPage extends React.PureComponent {
 	}
 	
 	for(var i=0; i<this.state.opr.length; i++){
-		if(this.state.formula[this.state.formula.length-1]===this.state.opr[i] || this.state.formula.length==0){
+		if(this.state.formula[this.state.formula.length-1]===this.state.opr[i] || this.state.formula.length==0 && symbol!=="."){
 			result="";
 			break;
+		}
+		else if(symbol==="."){
+			if(this.state.formula.length==0){
+				result="0.";
+			}
+			else{
+				if(this.state.formula[this.state.formula.length-1]===this.state.opr[i]){
+					result="";
+				}
+				else{
+					result=".";
+				}
+			}
 		}
 		else{
 			result=symbol;
@@ -65,13 +78,15 @@ export default class HelloPage extends React.PureComponent {
   }
   
   openBracket=(symbol)=>{
-    this.setState({
-      formula:this.state.formula+"("
-    })
+	if(this.state.formula[this.state.formula.length-1]!=="."){
+		this.setState({
+		  formula:this.state.formula+"("
+		})
+	}
   }
   closeBracket=(symbol)=>{
     var result = "";
-	if(this.state.formula.indexOf("(")==-1 || this.state.formula.length==0){
+	if(this.state.formula.indexOf("(")==-1 || this.state.formula.length==0 || this.state.formula[this.state.formula.length-1]==="."){
 		result="";
 	}
 	else{
@@ -108,23 +123,6 @@ export default class HelloPage extends React.PureComponent {
 			formula:"percent("+this.state.formula+")"
 		})
 	}
-  }
-  dotOperator=()=>{
-	var result="";
-	if(this.state.formula.length==0){
-		result="0.";
-	}
-	else{
-		if(this.state.formula[this.state.formula.length-1]==="."){
-			result="";
-		}
-		else{
-			result=".";
-		}
-	}
-    this.setState({
-		formula:this.state.formula+result
-    })
   }
   onPressACButton=()=>{
     this.setState({formula:"",text:""})
@@ -172,7 +170,7 @@ export default class HelloPage extends React.PureComponent {
               <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.onPressOperator} title="+"/>
             </View>
             <View style={styles.row}>
-			  <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.dotOperator} title="."/>
+			  <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperator} title="."/>
 			  <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressNumber} title="0"/>
 			  <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.percentOperator} title="%"/>
               <Button  style={styles.equalButton} titleStyle = {styles.titleOperationStyle} onPress={this.calculate} title="="/>

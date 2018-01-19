@@ -64,14 +64,14 @@ public class AbstractTreeBuilder {
 			default: throw new TokenizerException("Function error");
 		}
 	}
-	
+
 	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 	public Operation getTree() throws TokenizerException
 	{
 		Token t = it.next();
 		
 		switch (t.getType()){
-			case Token.TOKEN_FUNCTION:	return getFunction(t);	
+			case Token.TOKEN_FUNCTION:	return getFunction(t);
 			case Token.TOKEN_NUMBER:	return new Constant(""+((NumberToken)t).getValue());	
 			case Token.TOKEN_OPERATOR:	return getOperator(t);								
 			case Token.TOKEN_PARENTHESES_OPEN: return getTree();
