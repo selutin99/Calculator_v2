@@ -1,15 +1,14 @@
 # Calculator_v2
 Данное мобильное приложение представляет из себя многофункциональный калькулятор, способный выполнять действия инженерного калькулятора, находить производные произвольных функций, решать логарифмические уравнения, вычислять определённый интеграл.
-<hr>
 <h2 align="left"> Скриншоты программы:</h2>
 <p align="center">
-  <img src="https://image.ibb.co/mGxSOb/scr1.png" width="150" height="200">
-  <img src="https://image.ibb.co/jgsu3b/scr2.png" width="150" height="200">
-  <img src="https://image.ibb.co/mOvdww/scr3.png" width="150" height="200">
-  <img src="https://image.ibb.co/hLrJww/scr4.png" width="150" height="200">
-  <img src="https://image.ibb.co/iUbJww/scr5.png" width="150" height="200">
+  <img src="https://image.ibb.co/mGxSOb/scr1.png" width="160" height="200">
+  <img src="https://image.ibb.co/jgsu3b/scr2.png" width="160" height="200">
+  <img src="https://image.ibb.co/mOvdww/scr3.png" width="160" height="200">
+  <img src="https://image.ibb.co/hLrJww/scr4.png" width="160" height="200">
+  <img src="https://image.ibb.co/iUbJww/scr5.png" width="160" height="200">
 </p>
-<b>Список заданий и дедлайнов:</b>
+<h2 align="left"> Список заданий и дедлайнов:</h2>
 <ul>
   <s><li>7.01.18 - Организовать всю эту парашу <i>(Саня)</i></li></s>
   <s><li>8.08.18-10.08.18 - Разобраться с вёрсткой <i>(Вместе, если Гошан сможет, в случае чего научим по ходу дела)</i></li></s>
