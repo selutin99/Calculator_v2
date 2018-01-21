@@ -135,7 +135,7 @@ export default class HelloPage extends React.PureComponent {
 	}
   }
   onPressACButton=()=>{
-    this.setState({formula:"",text:""})
+    this.setState({formula:"",text:"", count: 1})
   }
   render() {
     return (
