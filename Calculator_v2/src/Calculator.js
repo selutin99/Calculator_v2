@@ -19,7 +19,7 @@ export default class HelloPage extends React.PureComponent {
     super(props);
     this.state={
       countOfSymbol: false,
-      count: 0,
+      count: 1,
       text: '',
       result: 0,
       formula: "",
@@ -36,13 +36,14 @@ export default class HelloPage extends React.PureComponent {
 
   onPressOperator=(symbol)=>{
 	var result="";
+  //var count = 1;
     if(symbol==="X"){
       symbol="*";
     }
 	else if(symbol==="X²"){
 	  symbol="^2";
 	}
-	
+
 	for(var i=0; i<this.state.opr.length; i++){
 		if(this.state.formula[this.state.formula.length-1]===this.state.opr[i] || this.state.formula.length==0 && symbol!=="."){
 			result="";
@@ -51,32 +52,41 @@ export default class HelloPage extends React.PureComponent {
 		else if(symbol==="."){
 			if(this.state.formula.length==0){
 				result="0.";
+        this.setState({
+      		count: 0
+      	})
 			}
 			else{
 				if(this.state.formula[this.state.formula.length-1]===this.state.opr[i]){
 					result="";
 				}
-				else{
+				else if (this.state.count === 1){
 					result=".";
+          this.setState({
+        		count: 0
+        	})
 				}
 			}
 		}
 		else{
 			result=symbol;
+      this.setState({
+        count: 1
+      })
 		}
 	}
-	
+
 	this.setState({
 		formula:this.state.formula+result
 	})
   }
-  
+
   onPressNumber=(symbol)=>{
 	this.setState({
 		formula:this.state.formula+symbol
 	})
   }
-  
+
   openBracket=(symbol)=>{
 	if(this.state.formula[this.state.formula.length-1]!=="."){
 		this.setState({
@@ -96,8 +106,8 @@ export default class HelloPage extends React.PureComponent {
       formula:this.state.formula+result
     })
   }
-  
-  
+
+
   backspaceOperator=()=>{
     this.setState({
       formula:this.state.formula.slice(0,this.state.formula.length-1)
