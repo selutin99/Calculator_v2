@@ -57,7 +57,7 @@ export default class HelloPage extends React.PureComponent {
       	})
 			}
 			else{
-				if(this.state.formula[this.state.formula.length-1]===this.state.opr[i]){
+				if(this.state.formula[this.state.formula.length-1]===this.state.opr[i] || this.state.formula[this.state.formula.length-1]===")"){
 					result="";
 				}
 				else if (this.state.count === 1){
@@ -88,7 +88,7 @@ export default class HelloPage extends React.PureComponent {
   }
 
   openBracket=(symbol)=>{
-	if(this.state.formula[this.state.formula.length-1]!=="." && this.state.formula[this.state.formula.length - 1] !== "("){
+	if(this.state.formula[this.state.formula.length-1]!=="."){
 		this.setState({
 		  formula:this.state.formula+"("
 		})
@@ -99,7 +99,7 @@ export default class HelloPage extends React.PureComponent {
 	if(this.state.formula.indexOf("(")==-1 || this.state.formula.length==0 || this.state.formula[this.state.formula.length-1]==="."){
 		result="";
 	}
-	else if (this.state.formula[this.state.formula.length - 1] !== ")"){
+	else{
 		result=symbol;
 	}
     this.setState({
