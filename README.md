@@ -13,5 +13,6 @@
   <li>22.01.18-25.01.18 - Устанавливать Хакинтош отсюда: 
   <a href="https://medium.com/@stevefan1999/how-to-develop-react-native-ios-apps-in-windows-with-hackintosh-well-sort-of-       15eabe701de2">Ссылка</a><i>(Каждый отдельно)</i></li>
   <li>22.01.18-25.01.18 - А образ macOs отсюда: <a href="http://maintracker.org/forum/viewtopic.php?t=5287454">Ссылка</a><i>(Каждый отдельно)</i></li>
-  <li>26.01.18-29.01.18 - Перенести все действия с кнопок IOS на событие, перекидывающее на сайт Android <i>(Вместе)</i></li>
+  <li>26.01.18-28.01.18 - Перенести все действия с кнопок IOS на событие, перекидывающее на сайт Android <i>(Вместе)</i></li>
+  <li>29.01.18-30.01.18 - Скомпилить это чудо в IPA или APP</li>
 </ul>
