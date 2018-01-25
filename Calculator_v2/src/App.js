@@ -74,12 +74,12 @@ const ViewContent = StackNavigator({
 			headerStyle: {
 				backgroundColor: 'black'
 			},
-            title: <Text style={{fontSize:16, color:'white'}}>Универсальный калькулятор</Text>,
+            title: <Text style={{fontSize:14, color:'white'}}>Универсальный калькулятор</Text>,
 			headerLeft: <TouchableHighlight onPress={ () => navigation.navigate('DrawerOpen') }>
 						<Image
 							source={require('./images/hamburgerIcon.png')}
 							style={{
-								marginLeft:5,
+								marginLeft:3,
 								width:40,
 								height:40,}}
 						/>

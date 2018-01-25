@@ -8,7 +8,8 @@ import {
   Alert,
   View,
   TouchableHighlight,
-  NativeModules
+  NativeModules,
+  Platform
 } from 'react-native';
 
 const Evaluate = NativeModules.CalculatorManager;
@@ -29,11 +30,15 @@ export default class HelloPage extends React.PureComponent {
 	this.onPressNumber = this.onPressNumber.bind(this)
   }
   calculate = () => {
-    Evaluate.calculate(this.state.formula, (e) => {
-      this.setState({text: e});
-    });
+    if (Platform.OS === 'android') {
+		Evaluate.calculate(this.state.formula, (e) => {
+		  this.setState({text: e});
+		});
+	}
+	if (Platform.OS === 'ios') {
+		this.setState({text:"Пока не работает"})
+	}
   }
-
   onPressOperator=(symbol)=>{
 	var result="";
   //var count = 1;
@@ -183,7 +188,7 @@ export default class HelloPage extends React.PureComponent {
 			  <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressOperator} title="."/>
 			  <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.onPressNumber} title="0"/>
 			  <Button  style={styles.buttonNumber} titleStyle ={styles.titleButtonStyle} onPress={this.percentOperator} title="%"/>
-              <Button  style={styles.equalButton} titleStyle = {styles.titleOperationStyle} onPress={this.calculate} title="="/>
+			  <Button  style={styles.equalButton} titleStyle = {styles.titleOperationStyle} onPress={this.calculate} title="="/>
             </View>
 			<View style={styles.row}>
               <Button  style={styles.operation} titleStyle = {styles.titleOperationStyle} onPress={this.openBracket} title="("/>

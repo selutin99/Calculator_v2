@@ -3,31 +3,12 @@ const {
     View,
     Text,
     StyleSheet,
-    Button,
     TextInput,
 	  NativeModules
 } = require('react-native');
 const { Component } = React;
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
-
-});
-
+import {Button} from './components/';
+import { Platform } from 'react-native';
 const Evaluate = NativeModules.LogariphmManager;
 
 export default class Logariphm extends Component {
@@ -39,9 +20,14 @@ export default class Logariphm extends Component {
 		}
     }
 	justEval = () => {
-		Evaluate.justEval(this.state.formula, (e) => {
-		  this.setState({text: e});
-		});
+		if(Platform.OS === 'android'){
+			Evaluate.justEval(this.state.formula, (e) => {
+			  this.setState({text: e});
+			});
+		}
+		if(Platform.OS === 'ios'){
+			this.setState({text: "Пока не работает"});
+		}
 	}
     render() {
         return (
@@ -54,7 +40,8 @@ export default class Logariphm extends Component {
               <Button
                 onPress={this.justEval}
                 title="Вычислить логарифм"
-                color="#f5901d"
+                style={styles.operation} 
+			    titleStyle = {styles.titleOperationStyle}
               />
               <Text style={{padding: 10, fontSize: 11}}>
                     Результаты:
@@ -66,3 +53,14 @@ export default class Logariphm extends Component {
         );
     }
 };
+
+const styles =StyleSheet.create({
+	operation:{
+		backgroundColor:'#f5901d',
+		borderRadius: 2
+	},
+	titleOperationStyle:{
+		color:'white',
+		fontSize:18,
+	}
+})

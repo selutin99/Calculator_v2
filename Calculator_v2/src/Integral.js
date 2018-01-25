@@ -5,15 +5,13 @@ const {
     StyleSheet,
 	TextInput,
 	Dimensions,
-	Button,
   NativeModules
 } = require('react-native');
 const { Component } = React;
+import {Button} from './components/';
+import { Platform } from 'react-native';
 
 var width = Dimensions.get('window').width;
-onPressDoNothing=()=>{
-}
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -21,8 +19,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
     },
+	operation:{
+		backgroundColor:'#f5901d',
+		borderRadius: 2
+	},
+	titleOperationStyle:{
+		color:'white',
+		fontSize:18,
+	}
 });
-
 const Evaluate = NativeModules.IntegralManager;
 
 export default class Integral extends Component {
@@ -37,9 +42,14 @@ export default class Integral extends Component {
     }
 
     justEval = () => {
-  		Evaluate.justEval(this.state.formula, this.state.down, this.state.up, (e) => {
-  		  this.setState({text: e});
-  		});
+		if(Platform.OS === 'android'){
+			Evaluate.justEval(this.state.formula, this.state.down, this.state.up, (e) => {
+			  this.setState({text: e});
+			});
+		}
+		if(Platform.OS === 'ios'){
+			this.setState({text: "Пока не работает"});
+		}
   	}
     render() {
         return (
@@ -47,7 +57,7 @@ export default class Integral extends Component {
 				<View style={{paddingLeft: 10}}>
 					<TextInput
 						style={{height: 40, width:40}}
-						placeholder=""
+						placeholder="b"
 						onChangeText={(value) => this.setState({up: value})}
 					>
 					</TextInput>
@@ -65,7 +75,7 @@ export default class Integral extends Component {
 				<View style={{paddingTop: 40, paddingLeft: 10}}>
 					<TextInput
 						style={{height: 40, width:40}}
-						placeholder=""
+						placeholder="a"
 						onChangeText={(value) => this.setState({down: value})}
 					>
 					</TextInput>
@@ -73,7 +83,8 @@ export default class Integral extends Component {
 				<Button
 				  onPress={this.justEval}
 				  title="Вычислить интеграл"
-				  color="#f5901d"
+				  style={styles.operation} 
+				  titleStyle = {styles.titleOperationStyle}
 				/>
 				<View style={{padding: 10}}>
 					<Text style={{fontSize: 11}}>
